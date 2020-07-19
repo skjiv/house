@@ -7,8 +7,6 @@ services:
     container_name: mongodb
     volumes:
       - /home/sanjiv/workspace/data:/data/db
-    ports: 
-      - "27017:27017"
 
   web:
     build: .
