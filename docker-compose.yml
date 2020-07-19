@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - /home/sanjiv/workspace/data:/data/db
+    ports: 
+      - "27017:27017"
+
+  web:
+    build: .
+    image: house:latest
+    container_name: house_app
+    env_file:
+      - ./.environment
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - /home/sanjiv/workspace/backup:/backup
+    ports:
+      - "8081:8000"
+    depends_on: 
+      - mongodb
+    links:
+      - mongodb
