@@ -91,8 +91,9 @@ MONGODB_DATABASES = {
         "name": "house",
         "host": "mongodb",
         "port": 27017,
-        "username": "root",
-        "password": "mongoadmin",
+        "username": "admin",
+        "password": "admin123",
+        "auth_source": "admin",
         "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
     },
 
@@ -100,6 +101,9 @@ MONGODB_DATABASES = {
         "name": "test_house",
         "host": "mongodb",
         "port": 27017,
+        "username": "admin",
+        "password": "admin123",
+        "auth_source": "admin",
         "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
     }
 }
@@ -125,14 +129,14 @@ else:
 
 # establish connection with default or test database, depending on the management command, being run
 # note that this connection syntax is correct for mongoengine0.9-, but mongoengine0.10+ introduced slight changes
-"""
 mongoengine.connect(
     db=MONGODB_DATABASES[db]['name'],
-    host=MONGODB_DATABASES[db]['host']
+    host=MONGODB_DATABASES[db]['host'],
+    username=MONGODB_DATABASES[db]['username'],
+    password=MONGODB_DATABASES[db]['password'],
+    authentication_source=MONGODB_DATABASES[db]['auth_source'],
 )
-"""
-mongoengine.connect("house", host='mongodb', port=27017)
-
+#mongoengine.connect('house', host='mongodb', username='admin', password='admin123', authentication_source='admin')
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

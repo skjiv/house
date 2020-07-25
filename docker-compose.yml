@@ -7,6 +7,9 @@ services:
     container_name: mongodb
     volumes:
       - /home/sanjiv/workspace/data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
 
   web:
     build: .
