@@ -5,6 +5,7 @@ services:
   mongodb:
     image: mongo
     container_name: mongodb
+    restart: always
     volumes:
       - /home/sanjiv/workspace/data:/data/db
     environment:
@@ -15,6 +16,7 @@ services:
     build: .
     image: house:latest
     container_name: house_app
+    restart: always
     env_file:
       - ./.environment
     command: python manage.py runserver 0.0.0.0:8000
